@@ -11,7 +11,6 @@ function LiveSearch() {
   const [options, setOptions] = useState([]);
   const [searchRes, setSearchRes] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(searchRes);
 
   const fetchProducts = useCallback(async (searchTerm = "") => {
     setLoading(true);
@@ -40,25 +39,29 @@ function LiveSearch() {
   return (
     <Autocomplete
       id="live-search"
-      freeSolo
+      options={options}
       value={searchRes}
-      onChange={(e, newValue) => handleSearchRes(newValue)}
-      onInputChange={(event, newInputValue) => {
-        fetchProducts(newInputValue);
-      }}
-      sx={{ width: 300 }}
-      disableClearable
+      loading={loading}
       open={open}
+      sx={{ width: 300 }}
+      freeSolo
+      autoComplete
+      openOnFocus
+      disableClearable
+      disableListWrap
       onOpen={() => {
         setOpen(true);
       }}
       onClose={() => {
         setOpen(false);
       }}
+      onChange={(e, newValue) => handleSearchRes(newValue)}
+      onInputChange={(e, newInputValue, reason) => {
+        if (reason === "input") fetchProducts(newInputValue);
+      }}
       isOptionEqualToValue={(option, value) => option.title === value.title}
       getOptionLabel={(option) => (option.title ? option.title : option)}
-      options={options}
-      loading={loading}
+      // clearIcon={<clearIcon size="small" color="red" />}
       renderOption={(props, option) => (
         <Stack
           component="li"
