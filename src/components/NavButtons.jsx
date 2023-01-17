@@ -37,12 +37,8 @@ const NavButtons = () => {
       <Button variant="text" endIcon={<LocalMall />} color="inherit">
         Cart
       </Button>
-      <IconButton onClick={toggleMode}>
-        {mode === "dark" ? (
-          <LightMode color="inherit" />
-        ) : (
-          <DarkMode color="inherit" />
-        )}
+      <IconButton onClick={toggleMode} color="inherit">
+        {mode === "dark" ? <LightMode /> : <DarkMode />}
       </IconButton>
     </Stack>
   );
