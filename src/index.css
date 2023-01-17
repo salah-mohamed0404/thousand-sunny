@@ -7,18 +7,3 @@
 html {
   scroll-behavior: smooth;
 }
-
-/* ::-webkit-scrollbar {
-  width: 0.6rem;
-}
-::-webkit-scrollbar-track {
-  background: rgb(254 226 226 / var(--tw-bg-opacity));
-  border-radius: 9px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(239 68 68 / var(--tw-bg-opacity));
-  border-radius: 11px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(185 28 28 / var(--tw-bg-opacity));
-} */
