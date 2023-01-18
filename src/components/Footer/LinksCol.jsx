@@ -1,29 +1,43 @@
 import { Link } from "react-router-dom";
 import { Button, Grid, Stack, Typography } from "@mui/material";
 
-const LinksCol = ({ cols = 2, title, links }) => {
+const LinksCol = ({ xs = 2, otherBreakPoints, title, links }) => {
   return (
-    <Grid item xs={cols} color="text.secondary" component="nav">
+    <Grid
+      item
+      xs={xs}
+      {...otherBreakPoints}
+      color="text.secondary"
+      component="nav"
+    >
       <Typography variant="h6" mb={4} color="text.primary">
         {title}
       </Typography>
 
       <Stack component="ul" alignItems="flex-start" color="inherit">
         {links.map(({ href, to, text }) => (
-          <Stack component="li">
+          <Stack
+            component="li"
+            sx={{ wordBreak: "break-word" }}
+            key={text.concat(!!href ? href : to)}
+          >
             {/* If normal link */}
             {!!href && (
-              <Button href={links.href} color="inherit">
+              <Button
+                href={links.href}
+                color="inherit"
+                sx={{ textAlign: "start" }}
+              >
                 {text}
               </Button>
             )}
             {/* If route link */}
             {!!to && (
-              <Stack component="li">
-                <Link to={to}>
-                  <Button color="inherit">{text}</Button>
-                </Link>
-              </Stack>
+              <Link to={to}>
+                <Button color="inherit" sx={{ textAlign: "start" }}>
+                  {text}
+                </Button>
+              </Link>
             )}
           </Stack>
         ))}

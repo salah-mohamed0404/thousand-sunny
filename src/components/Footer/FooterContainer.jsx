@@ -8,7 +8,13 @@ const FooterContainer = ({ children }) => {
       <Container
         component="footer"
         maxWidth="lg"
-        sx={{ borderTop: "1px solid", borderTopColor: "primary.light" }}
+        sx={{
+          borderTop: "1px solid",
+          borderTopColor: "primary.light",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <Grid
           container
@@ -16,6 +22,7 @@ const FooterContainer = ({ children }) => {
           px={2}
           spacing={4}
           columns={{ xs: 4, sm: 6, md: 12 }}
+          width="100%"
         >
           {children}
         </Grid>

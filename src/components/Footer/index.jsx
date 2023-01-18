@@ -8,7 +8,8 @@ const Footer = () => {
       <LogoCol />
 
       <LinksCol
-        cols={3}
+        xs={4}
+        otherBreakPoints={{ md: 3 }}
         title="Contact Us"
         links={[
           {
