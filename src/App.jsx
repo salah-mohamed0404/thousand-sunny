@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 import Routes from "./Routes";
 import Footer from "./components/Footer";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {mode === "dark" && <CssBaseline />}
-      <Header />
+      <NavBar />
       <Routes />
       <Footer />
     </ThemeProvider>
