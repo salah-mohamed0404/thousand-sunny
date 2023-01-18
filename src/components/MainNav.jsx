@@ -6,7 +6,7 @@ import NavButtons from "./NavButtons";
 
 const MainNav = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <Stack
           direction="row"
