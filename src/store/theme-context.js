@@ -17,15 +17,7 @@ export const ThemeContextProvider = (props) => {
     (mode) => ({
       palette: {
         mode,
-        ...(mode === "light"
-          ? {
-              // palette values for light mode
-              primary: { main: red[700] },
-            }
-          : {
-              // palette values for dark mode
-              primary: { main: red[700] },
-            }),
+        primary: { main: red[900] },
       },
     }),
     []
