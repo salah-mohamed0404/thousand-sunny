@@ -1,13 +1,15 @@
 import { useContext } from "react";
+// eslint-disable-next-line
 import { Stack, Avatar, Button, IconButton } from "@mui/material";
 import {
   LightMode,
+  // eslint-disable-next-line
   PersonIcon,
   FavoriteBorder,
   LocalMall,
   DarkMode,
 } from "@mui/icons-material";
-import ThemeContext from "../store/theme-context";
+import ThemeContext from "../../store/theme-context";
 
 const NavButtons = () => {
   const { mode, toggleMode } = useContext(ThemeContext);

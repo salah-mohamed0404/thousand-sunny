@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Stack } from "@mui/material";
-import LiveSearch from "./LiveSearch";
-import logo from "../assets/thousand-sunny-logo.png";
+import LiveSearch from "../LiveSearch";
+import logo from "../../assets/thousand-sunny-logo.png";
 import NavButtons from "./NavButtons";
 
 const MainNav = () => {

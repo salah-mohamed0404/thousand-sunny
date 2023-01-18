@@ -2,7 +2,7 @@ import { useEffect, useState, lazy, Suspense } from "react";
 const MainNav = lazy(() => import("./MainNav"));
 const MobileNav = lazy(() => import("./MobileNav"));
 
-const Header = () => {
+const NavBar = () => {
   const [isDesktop, setDesktop] = useState(false);
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const Header = () => {
   return <Suspense>{isDesktop ? <MainNav /> : <MobileNav />}</Suspense>;
 };
 
-export default Header;
+export default NavBar;
