@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 const Home = lazy(() => import("./containers/Home"));
+const Login = lazy(() => import("./containers/Login"));
+const SignUp = lazy(() => import("./containers/SignUp"));
 const Products = lazy(() => import("./containers/Products"));
 const ProductDetails = lazy(() => import("./containers/ProductDetails"));
 const UserProfile = lazy(() => import("./containers/UserProfile"));
@@ -12,6 +14,8 @@ export default function Links() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/user-profile" element={<UserProfile />} />
