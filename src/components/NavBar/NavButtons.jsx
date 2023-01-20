@@ -10,6 +10,7 @@ import {
   DarkMode,
 } from "@mui/icons-material";
 import ThemeContext from "../../store/theme-context";
+import LiveSearch from "../LiveSearch";
 
 const NavButtons = () => {
   const { mode, toggleMode } = useContext(ThemeContext);
@@ -25,6 +26,7 @@ const NavButtons = () => {
 
   return (
     <Stack direction="row" spacing={4}>
+      <LiveSearch />
       {/* <Link to="/user-profile">
         <Avatar>
           <PersonIcon />
