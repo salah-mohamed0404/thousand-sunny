@@ -1,7 +1,12 @@
-import React from "react";
+import { Stack } from "@mui/material";
+import HeroSection from "../components/HeroSection";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <Stack>
+      <HeroSection />
+    </Stack>
+  );
 };
 
 export default Home;
