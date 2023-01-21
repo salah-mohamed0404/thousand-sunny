@@ -18,7 +18,9 @@ const HeroWrapper = ({ children }) => {
       }}
       component="section"
     >
-      <Grid container>{children}</Grid>
+      <Grid container columnGap={2}>
+        {children}
+      </Grid>
     </Container>
   );
 };
