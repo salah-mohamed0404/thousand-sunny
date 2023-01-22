@@ -25,7 +25,7 @@ const NavButtons = () => {
   // }, [fetchCategories]);
 
   return (
-    <Stack direction="row" spacing={4}>
+    <Stack direction="row" spacing={4} alignItems="center">
       <LiveSearch />
       {/* <Link to="/user-profile">
         <Avatar>
