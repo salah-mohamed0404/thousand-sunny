@@ -15,7 +15,7 @@ const Features = () => {
       <Container>
         <Stack
           direction={{ md: "row" }}
-          py={2}
+          py={3}
           justifyContent="space-between"
           gap={2}
           component="ul"
