@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // eslint-disable-next-line
-import { Stack, Avatar, Button, IconButton } from "@mui/material";
+import { Stack, Avatar, Button, IconButton, Tooltip } from "@mui/material";
 import {
   LightMode,
   // eslint-disable-next-line
@@ -41,9 +41,11 @@ const NavButtons = () => {
       <Button variant="text" endIcon={<LocalMall />} color="inherit">
         Cart
       </Button>
-      <IconButton onClick={toggleMode} color="inherit">
-        {mode === "dark" ? <LightMode /> : <DarkMode />}
-      </IconButton>
+      <Tooltip title={mode === "dark" ? "Light mode" : "Dark mode"}>
+        <IconButton onClick={toggleMode} color="inherit">
+          {mode === "dark" ? <LightMode /> : <DarkMode />}
+        </IconButton>
+      </Tooltip>
     </Stack>
   );
 };
