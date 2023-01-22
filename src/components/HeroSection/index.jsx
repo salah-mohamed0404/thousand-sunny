@@ -1,14 +1,12 @@
 import HeroWrapper from "./HeroWrapper";
 import PrimaryCol from "./PrimaryCol";
 import SecodaryCol from "./SecodaryCol";
-import TertiaryCol from "./TertiaryCol";
 
 const HeroSection = () => {
   return (
     <HeroWrapper>
-      <PrimaryCol />
-      <SecodaryCol />
-      <TertiaryCol />
+      <PrimaryCol breakpoints={{ xs: 12, md: 7.75 }} />
+      <SecodaryCol breakpoints={{ xs: 12, md: 3.75 }} />
     </HeroWrapper>
   );
 };
