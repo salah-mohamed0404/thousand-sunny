@@ -1,27 +1,26 @@
-import { alpha, Container, Grid } from "@mui/material";
+import { alpha, Box, Container, Grid } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import tech from "../../assets/tech-wallpaper.jpg";
 
 const HeroWrapper = ({ children }) => {
   return (
-    <Container
-      maxWidth="xl"
+    <Box
+      py={7}
       sx={{
-        pt: 3,
-        pb: 5,
         backgroundImage: `linear-gradient(to bottom right, ${alpha(
-          grey[700],
-          0.5
-        )} , ${alpha(grey[500], 0.5)}), url(${tech})`,
+          grey[500],
+          0.3
+        )} , ${alpha(grey[400], 0.3)}), url(${tech})`,
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
       }}
       component="section"
     >
-      <Grid container columnGap={2}>
-        {children}
-      </Grid>
-    </Container>
+      <Container maxWidth="xl">
+        <Grid container rowGap={4} justifyContent="space-between">
+          {children}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
