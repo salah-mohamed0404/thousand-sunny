@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import laptop from "../../assets/laptop.jpg";
 import ColWrapper from "./ColWrapper";
 
-const PrimaryCol = () => {
+const PrimaryCol = ({ breakpoints = {} }) => {
   return (
-    <ColWrapper bgImg={laptop}>
-      <Stack width="50%" spacing={2}>
+    <ColWrapper
+      bgImg={laptop}
+      breakpoints={breakpoints}
+      otherStyle={{ backgroundPosition: "center" }}
+    >
+      <Stack
+        sx={{ width: { xs: "100%", sm: "70%", md: "50%" } }}
+        height="100%"
+        justifyContent="center"
+      >
         <Typography
           variant="subtitle1"
           width="fit-content"
@@ -16,12 +24,18 @@ const PrimaryCol = () => {
           Best Prices
         </Typography>
 
-        <Typography variant="h4" component="p" mb={10}>
+        <Typography variant="h3" component="p" mt={1}>
           Incredible Prices on All Your Favorite products
         </Typography>
 
+        <Typography mt={2}>
+          Free shipping on all your order. we deliver you enjoy
+        </Typography>
+
         <Link to="/products">
-          <Button variant="contained">Shop Now</Button>
+          <Button variant="contained" sx={{ mt: 5 }}>
+            do't miss it
+          </Button>
         </Link>
       </Stack>
     </ColWrapper>
