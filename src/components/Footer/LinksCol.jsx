@@ -23,7 +23,12 @@ const LinksCol = ({ xs = 2, otherBreakPoints, title, links }) => {
           >
             {/* If normal link */}
             {!!href && (
-              <Button href={href} color="inherit" sx={{ textAlign: "start" }}>
+              <Button
+                href={href}
+                target="_blank"
+                color="inherit"
+                sx={{ textAlign: "start" }}
+              >
                 {text}
               </Button>
             )}
