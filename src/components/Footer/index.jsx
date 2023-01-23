@@ -2,6 +2,8 @@ import LogoCol from "./LogoCol";
 import LinksCol from "./LinksCol";
 import FooterContainer from "./FooterContainer";
 
+const location = "cell 102, level 6, Impel down";
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -13,8 +15,11 @@ const Footer = () => {
         title="Contact Us"
         links={[
           {
-            href: "#",
-            text: "cell 102, level 6, Impel down",
+            href: `https://www.google.com/maps/search/${location.replace(
+              " ",
+              "+"
+            )}`,
+            text: location,
           },
           { href: "tel:+201116387902", text: "+201116387902" },
           {
