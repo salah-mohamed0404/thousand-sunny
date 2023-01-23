@@ -28,7 +28,7 @@ const Categories = () => {
       <Stack
         spacing={2}
         divider={<Divider flexItem />}
-        maxHeight={300}
+        maxHeight={430}
         p={2}
         sx={{
           overflowY: "scroll",
