@@ -8,6 +8,7 @@ import {
   IconButton,
   InputAdornment,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Minimize, Search } from "@mui/icons-material";
@@ -124,34 +125,36 @@ function LiveSearch() {
         noOptionsText="NO AVAILABLE PRODUCTS😥"
       />
 
-      <IconButton
-        color="inherit"
-        onClick={toggleSearch}
-        sx={{
-          aspectRatio: "1/1",
-          position: "absolute",
-          right: "3%",
-          top: "50%",
-          translate: "0 -50%",
-        }}
-      >
-        {!openSearch ? (
-          <Search color="inherit" />
-        ) : (
-          <Minimize
-            color="inherit"
-            sx={{
-              color: open
-                ? mode === "dark"
-                  ? "primary.main"
-                  : red[100]
-                : mode === "dark"
-                ? "inherit"
-                : red[50],
-            }}
-          />
-        )}
-      </IconButton>
+      <Tooltip title={`${openSearch ? "Minimize Search" : "Open Search"}`}>
+        <IconButton
+          color="inherit"
+          onClick={toggleSearch}
+          sx={{
+            aspectRatio: "1/1",
+            position: "absolute",
+            right: "3%",
+            top: "50%",
+            translate: "0 -50%",
+          }}
+        >
+          {!openSearch ? (
+            <Search color="inherit" />
+          ) : (
+            <Minimize
+              color="inherit"
+              sx={{
+                color: open
+                  ? mode === "dark"
+                    ? "primary.main"
+                    : red[100]
+                  : mode === "dark"
+                  ? "inherit"
+                  : red[50],
+              }}
+            />
+          )}
+        </IconButton>
+      </Tooltip>
     </Stack>
   );
 }
