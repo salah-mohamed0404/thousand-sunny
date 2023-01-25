@@ -6,7 +6,18 @@ const ProductContent = ({ title, price, discount, rating = 0 }) => {
       <Typography gutterBottom variant="h6">
         {title}
       </Typography>
-      <Rating value={parseFloat(rating.toFixed(1))} precision={0.1} readOnly />
+
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Rating
+          value={parseFloat(rating.toFixed(1))}
+          precision={0.1}
+          readOnly
+        />
+        <Typography variant="body2" color="text.secondary">
+          ({rating.toFixed(1)})
+        </Typography>
+      </Stack>
+
       <Stack direction="row" spacing={2} mt={2} color="primary.main">
         <Typography
           variant="h6"
