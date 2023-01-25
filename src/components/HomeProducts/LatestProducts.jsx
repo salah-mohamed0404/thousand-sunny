@@ -11,7 +11,7 @@ const LatestProducts = () => {
     const fetchProducts = async () => {
       setLoading(true);
       const res = await axios.get(
-        "https://dummyjson.com/products?limit=12&select=id,title,rating,price,discountPercentage"
+        "https://dummyjson.com/products?limit=12&skip=6&select=id,title,rating,price,discountPercentage"
       );
       setProducts(res.data.products);
       setLoading(false);
