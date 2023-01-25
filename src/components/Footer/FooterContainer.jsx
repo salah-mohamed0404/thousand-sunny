@@ -4,7 +4,7 @@ import React from "react";
 const FooterContainer = ({ children }) => {
   return (
     <>
-      <Divider />
+      <Divider sx={{ mt: 5 }} />
       <Container
         component="footer"
         maxWidth="lg"
