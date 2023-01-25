@@ -4,13 +4,17 @@ import ItemWapper from "./ItemWapper";
 import ProductActions from "./ProductActions";
 import ProductContent from "./ProductContent";
 
-const ProductsList = ({
-  col = { xs: 12 },
-  breakpoints = [],
-  products = [],
-}) => {
+const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
   return (
-    <Grid container columns={col} columnGap={2} rowGap={4}>
+    <Grid
+      container
+      columns={col}
+      columnGap={2}
+      rowGap={4}
+      alignContent="center"
+      justifyContent="center"
+      justifyItems="center"
+    >
       {products.map((product) => (
         <ItemWapper key={product.id} breakpoints={breakpoints}>
           <CardMedia
