@@ -4,7 +4,11 @@ import ItemWapper from "./ItemWapper";
 import ProductActions from "./ProductActions";
 import ProductContent from "./ProductContent";
 
-const ProductsList = ({ col = 12, breakpoints, products = [] }) => {
+const ProductsList = ({
+  col = { xs: 12 },
+  breakpoints = [],
+  products = [],
+}) => {
   return (
     <Grid container columns={col} columnGap={2} rowGap={4}>
       {products.map((product) => (
