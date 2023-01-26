@@ -19,6 +19,7 @@ a:visited {
 }
 ::-webkit-scrollbar-track {
   background-color: #ffcdd2;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #c62828;
