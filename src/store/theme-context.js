@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 import { createContext, useCallback, useMemo, useState } from "react";
 
 const ThemeContext = createContext({
@@ -18,6 +18,7 @@ export const ThemeContextProvider = (props) => {
       palette: {
         mode,
         primary: { main: red[900] },
+        background: { paper: mode === "light" ? grey[200] : grey[900] },
       },
     }),
     []
