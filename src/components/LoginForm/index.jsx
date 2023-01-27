@@ -1,17 +1,10 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { TextField } from "@mui/material";
 import axios from "axios";
 import AuthContext from "../../store/Auth-context";
+import FormButtons from "./FormButtons";
+import RememberMeCheckBox from "./RememberMeCheckBox";
+import LoginFormContainer from "./LoginFormContainer";
 
 const testusername = "atuny0";
 const userNameDefaultHelperText = `Enter your username😊, Test with ${testusername}`;
@@ -64,21 +57,14 @@ const LoginForm = () => {
       login(res.data, rememberMe);
     } catch (e) {
       setSubmitError(
-        "The username or password are wrong sorry try to remember the correct one"
+        "The username or password are wrong sorry😓 try to remember the correct one🤩"
       );
       setLoading(false);
     }
   };
 
   return (
-    <Stack
-      component="form"
-      spacing={3}
-      width="70%"
-      justifyContent="center"
-      alignItems="center"
-      onSubmit={handleSubmit}
-    >
+    <LoginFormContainer handleSubmit={handleSubmit}>
       <TextField
         label="User Name"
         value={userName}
@@ -98,37 +84,13 @@ const LoginForm = () => {
         fullWidth
       />
 
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              value={rememberMe}
-              defaultChecked
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-          }
-          label="Remember me"
-        />
-      </FormGroup>
+      <RememberMeCheckBox
+        rememberMe={rememberMe}
+        setRememberMe={setRememberMe}
+      />
 
-      <Stack spacing={2} alignItems="center">
-        {submitError !== "" && (
-          <Typography color="error.main">{submitError}</Typography>
-        )}
-        <LoadingButton
-          type="submit"
-          variant="contained"
-          size="large"
-          loading={loading}
-          sx={{ mt: 5 }}
-        >
-          Log in
-        </LoadingButton>
-        <Link to="/signup">
-          <Button size="large">Create new account</Button>
-        </Link>
-      </Stack>
-    </Stack>
+      <FormButtons loading={loading} submitError={submitError} />
+    </LoginFormContainer>
   );
 };
 
