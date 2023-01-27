@@ -10,7 +10,7 @@ const ThemeContext = createContext({
   toggleMode: () => {},
 });
 
-export const ThemeContextProvider = (props) => {
+export const ThemeContextProvider = ({ children }) => {
   const [mode, setMode] = useState("dark");
 
   const getDesignTokens = useCallback(
@@ -18,7 +18,7 @@ export const ThemeContextProvider = (props) => {
       palette: {
         mode,
         primary: { main: red[900] },
-        background: { paper: mode === "light" ? grey[200] : grey[900] },
+        background: { paper: mode === "light" ? red[50] : grey[900] },
       },
     }),
     []
@@ -42,7 +42,7 @@ export const ThemeContextProvider = (props) => {
         toggleMode,
       }}
     >
-      {props.children}
+      {children}
     </ThemeContext.Provider>
   );
 };
