@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import ThemeContext from "../../store/theme-context";
 import LiveSearch from "../LiveSearch";
+import { Link } from "react-router-dom";
 
 const NavButtons = () => {
   const { mode, toggleMode } = useContext(ThemeContext);
@@ -32,9 +33,11 @@ const NavButtons = () => {
           <PersonIcon />
         </Avatar>
       </Link> */}
-      <Button variant="text" color="inherit">
-        Sign in
-      </Button>
+      <Link to="/login">
+        <Button variant="text" color="inherit">
+          Log in
+        </Button>
+      </Link>
       <Button variant="text" endIcon={<FavoriteBorder />} color="inherit">
         WishList
       </Button>

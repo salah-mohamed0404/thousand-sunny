@@ -36,7 +36,7 @@ const Footer = () => {
             href: "#",
             text: "Create Account",
           },
-          { href: "#", text: "Sign in" },
+          { to: "/login", text: "Log in" },
           {
             href: "#",
             text: "IOS App",
