@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import AuthenticatedRoute from "./components/CheckAuthRoutes/AuthenticatedRoute";
+import UnauthenticatedRoute from "./components/CheckAuthRoutes/UnauthenticatedRoute";
 const Home = lazy(() => import("./containers/Home"));
 const Login = lazy(() => import("./containers/Login"));
 const SignUp = lazy(() => import("./containers/SignUp"));
@@ -14,11 +16,32 @@ export default function Links() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/login"
+            element={
+              <UnauthenticatedRoute>
+                <Login />
+              </UnauthenticatedRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <UnauthenticatedRoute>
+                <SignUp />
+              </UnauthenticatedRoute>
+            }
+          />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/user-profile" element={<UserProfile />} />
+          <Route
+            path="/user-profile"
+            element={
+              <AuthenticatedRoute>
+                <UserProfile />
+              </AuthenticatedRoute>
+            }
+          />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
