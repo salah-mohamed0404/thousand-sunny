@@ -1,4 +1,4 @@
-import { CardMedia, Grid } from "@mui/material";
+import { Badge, CardMedia, Grid } from "@mui/material";
 import placeholderImg from "../../assets/placeholder.jpg";
 import ItemWapper from "./ItemWapper";
 import ProductActions from "./ProductActions";
@@ -16,7 +16,21 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
       justifyItems="center"
     >
       {products.map((product) => (
-        <ItemWapper key={product.id} breakpoints={breakpoints}>
+        <ItemWapper
+          key={product.id}
+          discount={product.discountPercentage}
+          breakpoints={breakpoints}
+        >
+          <Badge
+            color="primary"
+            badgeContent={`-${product.discountPercentage}%`}
+            overlap="rectangular"
+            sx={{
+              position: "absolute",
+              top: "5%",
+              right: "15%",
+            }}
+          />
           <CardMedia
             component="img"
             height={200}
