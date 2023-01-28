@@ -16,11 +16,7 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
       justifyItems="center"
     >
       {products.map((product) => (
-        <ItemWapper
-          key={product.id}
-          discount={product.discountPercentage}
-          breakpoints={breakpoints}
-        >
+        <ItemWapper key={product.id} breakpoints={breakpoints}>
           <Badge
             color="primary"
             badgeContent={`-${product.discountPercentage}%`}

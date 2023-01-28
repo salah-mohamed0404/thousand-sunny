@@ -1,7 +1,7 @@
 import { Card, Grid } from "@mui/material";
 import React from "react";
 
-const ItemWapper = ({ children, breakpoints, discount }) => {
+const ItemWapper = ({ children, breakpoints }) => {
   return (
     <Grid
       item
