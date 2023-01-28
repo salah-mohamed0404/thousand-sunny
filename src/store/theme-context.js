@@ -1,6 +1,12 @@
 import { createTheme } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
-import { createContext, useCallback, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 const ThemeContext = createContext({
   theme: null,
@@ -8,10 +14,12 @@ const ThemeContext = createContext({
   setMode: () => {},
   getDesignTokens: () => {},
   toggleMode: () => {},
+  isDesktop: false,
 });
 
 export const ThemeContextProvider = ({ children }) => {
   const [mode, setMode] = useState("dark");
+  const [isDesktop, setDesktop] = useState(false);
 
   const getDesignTokens = useCallback(
     (mode) => ({
@@ -33,6 +41,20 @@ export const ThemeContextProvider = ({ children }) => {
     [mode, getDesignTokens]
   );
 
+  useEffect(() => {
+    const updateMedia = () => {
+      if (window.innerWidth >= 900) {
+        setDesktop(true);
+      } else {
+        setDesktop(false);
+      }
+    };
+    updateMedia();
+
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, []);
+
   return (
     <ThemeContext.Provider
       value={{
@@ -40,6 +62,7 @@ export const ThemeContextProvider = ({ children }) => {
         mode,
         getDesignTokens,
         toggleMode,
+        isDesktop,
       }}
     >
       {children}
