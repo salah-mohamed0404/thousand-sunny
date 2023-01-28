@@ -20,6 +20,17 @@ const ThemeContext = createContext({
 export const ThemeContextProvider = ({ children }) => {
   const [mode, setMode] = useState("dark");
   const [isDesktop, setDesktop] = useState(false);
+  const modeStorageField = "1000sunnyDarkmode";
+
+  useEffect(() => {
+    const storedMode = localStorage.getItem(modeStorageField);
+    if (storedMode) setMode(storedMode);
+  }, []);
+  console.log(1);
+
+  useEffect(() => {
+    localStorage.setItem(modeStorageField, mode);
+  }, [mode]);
 
   const getDesignTokens = useCallback(
     (mode) => ({
