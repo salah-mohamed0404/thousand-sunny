@@ -1,8 +1,8 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import { useState } from "react";
-import FeaturedProducts from "./FeaturedProducts";
-import LatestProducts from "./LatestProducts";
+import { lazy, useState } from "react";
+const FeaturedProducts = lazy(() => import("./FeaturedProducts"));
+const LatestProducts = lazy(() => import("./LatestProducts"));
 
 const Products = () => {
   const [value, setValue] = useState("1");
