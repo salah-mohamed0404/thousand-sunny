@@ -20,7 +20,7 @@ const LatestProducts = () => {
   }, []);
 
   return !loading ? (
-    <ProductsList products={products} breakpoints={{ xs: 3.75 }} />
+    <ProductsList products={products} breakpoints={{ sx: 5, md: 3.75 }} />
   ) : (
     <HomeProductsLoading />
   );
