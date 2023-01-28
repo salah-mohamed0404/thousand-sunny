@@ -26,7 +26,7 @@ export const ThemeContextProvider = ({ children }) => {
       palette: {
         mode,
         primary: { main: red[900] },
-        background: { paper: mode === "light" ? red[50] : grey[900] },
+        background: { paper: mode === "light" ? grey[100] : grey[900] },
       },
     }),
     []
