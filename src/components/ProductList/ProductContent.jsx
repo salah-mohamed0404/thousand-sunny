@@ -18,7 +18,13 @@ const ProductContent = ({ title, price, discount, rating = 0 }) => {
         </Typography>
       </Stack>
 
-      <Stack direction="row" spacing={2} mt={2} color="primary.main">
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        flexWrap="wrap"
+        columnGap={2}
+        mt={2}
+        color="primary.main"
+      >
         <Typography
           variant="h6"
           component="div"
