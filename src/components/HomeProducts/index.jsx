@@ -1,17 +1,22 @@
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Box, Container, Grid } from "@mui/material";
-import Categories from "./Categories";
 import Products from "./Products";
+import { useContext } from "react";
+import ThemeContext from "../../store/theme-context";
+const Categories = lazy(() => import("./Categories"));
 
 const HomeProducts = () => {
+  const { isDesktop } = useContext(ThemeContext);
+
   return (
     <Box component="section">
       <Container>
         <Grid container spacing={3}>
-          <Grid item xs={9}>
+          <Grid item xs={12} md={9}>
             <Products />
           </Grid>
           <Grid item xs={3}>
-            <Categories />
+            <Suspense>{isDesktop && <Categories />}</Suspense>
           </Grid>
         </Grid>
       </Container>
