@@ -9,27 +9,33 @@ import { CardActions, IconButton, Tooltip } from "@mui/material";
 import CartContext from "../../store/cart-context";
 import WishlistContext from "../../store/wishlist-context";
 
-const ProductActions = ({ productId }) => {
-  const { cartProductIds, addToCart, removeFromCart } = useContext(CartContext);
-  const { wishlistProductIds, addToWishlist, removeFromWishlist } =
+const ProductActions = ({ product }) => {
+  const { cartProducts, addToCart, removeFromCart } = useContext(CartContext);
+  const { wishlistProducts, addToWishlist, removeFromWishlist } =
     useContext(WishlistContext);
   const isInCart = useMemo(
-    () => cartProductIds.findIndex((id) => id === productId) !== -1,
-    [cartProductIds, productId]
+    () =>
+      cartProducts.findIndex((cartProduct) => cartProduct.id === product.id) !==
+      -1,
+    [cartProducts, product]
   );
-  const isInWishlist = useMemo(
-    () => wishlistProductIds.findIndex((id) => id === productId) !== -1,
-    [wishlistProductIds, productId]
-  );
+  const isInWishlist = useMemo(() => {
+    console.log(1);
+    return (
+      wishlistProducts.findIndex(
+        (wishProduct) => wishProduct.id === product.id
+      ) !== -1
+    );
+  }, [wishlistProducts, product]);
 
   const toggleCart = () => {
-    if (isInCart) removeFromCart(productId);
-    else addToCart(productId);
+    if (isInCart) removeFromCart(product);
+    else addToCart(product);
   };
 
   const toggleWishlist = () => {
-    if (isInWishlist) removeFromWishlist(productId);
-    else addToWishlist(productId);
+    if (isInWishlist) removeFromWishlist(product);
+    else addToWishlist(product);
   };
 
   return (
