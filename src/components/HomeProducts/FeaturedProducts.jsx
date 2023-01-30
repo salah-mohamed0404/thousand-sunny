@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HomeProductsLoading from "./HomeProductsLoading";
-import ProductsList from "../ProductList";
+import HomeProductList from "./HomeProductList";
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,11 +18,7 @@ const FeaturedProducts = () => {
     fetchProducts();
   }, []);
 
-  return !loading ? (
-    <ProductsList products={products} breakpoints={{ xs: 5, md: 3.75 }} />
-  ) : (
-    <HomeProductsLoading />
-  );
+  return <HomeProductList loading={loading} products={products} />;
 };
 
 export default FeaturedProducts;
