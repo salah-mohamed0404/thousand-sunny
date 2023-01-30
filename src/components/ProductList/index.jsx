@@ -1,8 +1,7 @@
-import { Badge, CardMedia, Grid } from "@mui/material";
-import placeholderImg from "../../assets/placeholder.jpg";
+import { Badge, Grid } from "@mui/material";
 import ItemWapper from "./ItemWapper";
 import ProductActions from "./ProductActions";
-import ProductContent from "./ProductContent";
+import ProductCardActionArea from "./ProductCardActionArea";
 
 const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
   return (
@@ -27,21 +26,10 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
               right: "15%",
             }}
           />
-          <CardMedia
-            component="img"
-            height={200}
-            image={placeholderImg}
-            alt={product.title}
-          />
 
-          <ProductContent
-            title={product.title}
-            price={product.price}
-            discount={product.discountPercentage}
-            rating={product.rating}
-          />
+          <ProductCardActionArea product={product} />
 
-          <ProductActions productId={product.id} />
+          <ProductActions />
         </ItemWapper>
       ))}
     </Grid>
