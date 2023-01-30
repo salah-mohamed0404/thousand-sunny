@@ -19,7 +19,7 @@ const ProductContent = ({ title, price, discount, rating = 0 }) => {
       </Stack>
 
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction="row"
         flexWrap="wrap"
         columnGap={2}
         mt={2}
