@@ -10,7 +10,7 @@ const ProductContent = ({ title, price, discount, rating = 0 }) => {
       </Box>
 
       <Stack spacing={2} flexGrow={1} justifyContent="flex-end">
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack direction="row" alignItems="center" gap={1} flexWrap="wrap">
           <Rating
             value={parseFloat(rating.toFixed(1))}
             precision={0.1}
