@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Stack } from "@mui/material";
 import logo from "../../assets/thousand-sunny-logo.png";
-import NavButtons from "./NavButtons";
+import MainNavButtons from "./MainNavButtons";
 
 const MainNav = () => {
   return (
@@ -18,7 +18,7 @@ const MainNav = () => {
             <img src={logo} alt="website logo" style={{ width: 64 }} />
           </Link>
 
-          <NavButtons />
+          <MainNavButtons />
         </Stack>
       </Toolbar>
     </AppBar>

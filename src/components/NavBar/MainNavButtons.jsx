@@ -4,15 +4,18 @@ import {
   LightMode,
   Person,
   FavoriteBorder,
-  LocalMall,
   DarkMode,
   Login,
   Logout,
+  LocalMallOutlined,
 } from "@mui/icons-material";
 import ThemeContext from "../../store/theme-context";
 import LiveSearch from "../LiveSearch";
 import { Link } from "react-router-dom";
 import AuthContext from "../../store/Auth-context";
+import WishlistButton from "./WishlistButton";
+import CartButton from "./CartButton";
+import AuthButton from "./AuthButton";
 
 const MainNavButtons = () => {
   const { mode, toggleMode } = useContext(ThemeContext);
@@ -21,28 +24,13 @@ const MainNavButtons = () => {
   return (
     <Stack direction="row" spacing={4} alignItems="center">
       <LiveSearch />
-      <Button variant="text" endIcon={<FavoriteBorder />} color="inherit">
-        WishList
-      </Button>
-      <Button variant="text" endIcon={<LocalMall />} color="inherit">
-        Cart
-      </Button>
-      {!isAuthenticated ? (
-        <Link to="/login">
-          <Button variant="text" color="inherit" endIcon={<Login />}>
-            Log in
-          </Button>
-        </Link>
-      ) : (
-        <Button
-          variant="text"
-          color="inherit"
-          endIcon={<Logout />}
-          onClick={logout}
-        >
-          log out
-        </Button>
-      )}
+
+      <WishlistButton />
+
+      <CartButton />
+
+      <AuthButton isAuthenticated={isAuthenticated} logout={logout} />
+
       {isAuthenticated && (
         <Tooltip title="User profile">
           <Link to="/user-profile">
