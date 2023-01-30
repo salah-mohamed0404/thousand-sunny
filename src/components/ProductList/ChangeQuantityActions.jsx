@@ -7,9 +7,16 @@ const ChangeQuantityActions = ({
   isInCart,
   changeQuantity,
   product,
+  cartProducts,
   handleRemoveFromCart,
 }) => {
-  const [quantity, setQuantity] = useState(product.quantity);
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    const cartProduct = cartProducts.find((item) => item.id === product.id);
+    const productQuantity = cartProduct?.quantity;
+    if (productQuantity) setQuantity(productQuantity);
+  }, [cartProducts, product.id]);
 
   useEffect(() => {
     if (quantity <= 0) handleRemoveFromCart();
