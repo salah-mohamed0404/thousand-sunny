@@ -1,55 +1,50 @@
 import { useMemo, useContext } from "react";
-import {
-  Favorite,
-  FavoriteBorder,
-  LocalMall,
-  LocalMallOutlined,
-} from "@mui/icons-material";
-import { CardActions, IconButton, Tooltip } from "@mui/material";
+import { CardActions, Stack } from "@mui/material";
 import CartContext from "../../store/cart-context";
-import WishlistContext from "../../store/wishlist-context";
+import WishlistButton from "./WishlistButton";
+import CartButton from "./CartButton";
+import ChangeQuantityActions from "./ChangeQuantityActions";
+import { useCallback } from "react";
 
 const ProductActions = ({ product }) => {
-  const { cartProducts, addToCart, removeFromCart } = useContext(CartContext);
-  const { wishlistProducts, addToWishlist, removeFromWishlist } =
-    useContext(WishlistContext);
+  const { cartProducts, addToCart, removeFromCart, changeQuantity } =
+    useContext(CartContext);
+
   const isInCart = useMemo(
     () =>
       cartProducts.findIndex((cartProduct) => cartProduct.id === product.id) !==
       -1,
     [cartProducts, product]
   );
-  const isInWishlist = useMemo(() => {
-    console.log(1);
-    return (
-      wishlistProducts.findIndex(
-        (wishProduct) => wishProduct.id === product.id
-      ) !== -1
-    );
-  }, [wishlistProducts, product]);
 
-  const toggleCart = () => {
-    if (isInCart) removeFromCart(product);
-    else addToCart(product);
+  const handleAddToCart = () => {
+    product.quantity = 1;
+    addToCart(product);
   };
 
-  const toggleWishlist = () => {
-    if (isInWishlist) removeFromWishlist(product);
-    else addToWishlist(product);
-  };
+  const handleRemoveFromCart = useCallback(() => {
+    product.quantity = 0;
+    removeFromCart(product);
+  }, [product, removeFromCart]);
 
   return (
-    <CardActions sx={{ pl: 2 }}>
-      <Tooltip title="Add to cart">
-        <IconButton onClick={toggleCart}>
-          {!isInCart ? <LocalMallOutlined /> : <LocalMall />}
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Add to wishlist">
-        <IconButton onClick={toggleWishlist}>
-          {!isInWishlist ? <FavoriteBorder /> : <Favorite />}
-        </IconButton>
-      </Tooltip>
+    <CardActions>
+      <Stack direction="row">
+        <CartButton
+          isInCart={isInCart}
+          handleAddToCart={handleAddToCart}
+          handleRemoveFromCart={handleRemoveFromCart}
+        />
+
+        <ChangeQuantityActions
+          isInCart={isInCart}
+          product={product}
+          changeQuantity={changeQuantity}
+          handleRemoveFromCart={handleRemoveFromCart}
+        />
+
+        <WishlistButton product={product} />
+      </Stack>
     </CardActions>
   );
 };
