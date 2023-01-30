@@ -10,7 +10,12 @@ const ProductCardActionArea = ({ product }) => {
     >
       <Link
         to={`/products/${product.id}`}
-        style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+        style={{
+          flexGrow: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
         <CardMedia
           component="img"
