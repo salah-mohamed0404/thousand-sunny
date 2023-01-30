@@ -29,7 +29,7 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
 
           <ProductCardActionArea product={product} />
 
-          <ProductActions />
+          <ProductActions productId={product.id} />
         </ItemWapper>
       ))}
     </Grid>
