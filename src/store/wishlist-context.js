@@ -18,29 +18,32 @@ export const WishlistContextProvider = ({ children }) => {
     if (storedWishlist) setProducts(storedWishlist);
   }, []);
 
-  const addToWishlist = useCallback(
-    (product) => {
-      const newProducts = [...products, product];
-      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
+  const addToWishlist = useCallback((product) => {
+    setProducts((prevProducts) => {
+      const updatedProducts = [...prevProducts, product];
 
-      setProducts((prevProducts) => [...prevProducts, product]);
-    },
-    [products]
-  );
+      localStorage.setItem(
+        localStorageRecordName,
+        JSON.stringify(updatedProducts)
+      );
 
-  const removeFromWishlist = useCallback(
-    (product) => {
-      const newProducts = products.filter(
+      return updatedProducts;
+    });
+  }, []);
+
+  const removeFromWishlist = useCallback((product) => {
+    setProducts((prevProducts) => {
+      const updatedProducts = prevProducts.filter(
         (prevProduct) => prevProduct.id !== product.id
       );
-      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
 
-      setProducts((prevProducts) =>
-        prevProducts.filter((prevProduct) => prevProduct.id !== product.id)
+      localStorage.setItem(
+        localStorageRecordName,
+        JSON.stringify(updatedProducts)
       );
-    },
-    [products]
-  );
+      return updatedProducts;
+    });
+  }, []);
 
   return (
     <WishlistContext.Provider

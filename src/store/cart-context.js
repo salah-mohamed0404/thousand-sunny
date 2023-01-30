@@ -4,6 +4,7 @@ const CartContext = createContext({
   cartProducts: [],
   addToCart: () => {},
   removeFromCart: () => {},
+  changeQuantity: () => {},
 });
 
 export const CartContextProvider = ({ children }) => {
@@ -16,29 +17,51 @@ export const CartContextProvider = ({ children }) => {
     if (storedCart) setProducts(storedCart);
   }, []);
 
-  const addToCart = useCallback(
-    (product) => {
-      const newProducts = [...products, product];
-      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
+  const addToCart = useCallback((product) => {
+    setProducts((prevProducts) => {
+      product.quantity = 1;
+      const updatedProducts = [...prevProducts, product];
 
-      setProducts((prevProducts) => [...prevProducts, product]);
-    },
-    [products]
-  );
+      localStorage.setItem(
+        localStorageRecordName,
+        JSON.stringify(updatedProducts)
+      );
 
-  const removeFromCart = useCallback(
-    (product) => {
-      const newProducts = products.filter(
+      return updatedProducts;
+    });
+  }, []);
+
+  const changeQuantity = useCallback((productId, newQuantity) => {
+    setProducts((prevProducts) => {
+      const updatedProducts = prevProducts.map((prevProduct) => {
+        if (prevProduct.id === productId)
+          return { ...prevProduct, quantity: newQuantity };
+
+        return prevProduct;
+      });
+
+      localStorage.setItem(
+        localStorageRecordName,
+        JSON.stringify(updatedProducts)
+      );
+
+      return updatedProducts;
+    });
+  }, []);
+
+  const removeFromCart = useCallback((product) => {
+    setProducts((prevProducts) => {
+      const updatedProducts = prevProducts.filter(
         (prevProduct) => prevProduct.id !== product.id
       );
-      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
 
-      setProducts((prevProducts) =>
-        prevProducts.filter((prevProduct) => prevProduct.id !== product.id)
+      localStorage.setItem(
+        localStorageRecordName,
+        JSON.stringify(updatedProducts)
       );
-    },
-    [products]
-  );
+      return updatedProducts;
+    });
+  }, []);
 
   return (
     <CartContext.Provider
@@ -46,6 +69,7 @@ export const CartContextProvider = ({ children }) => {
         cartProducts: products,
         addToCart,
         removeFromCart,
+        changeQuantity,
       }}
     >
       {children}
