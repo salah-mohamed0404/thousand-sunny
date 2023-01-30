@@ -1,28 +1,20 @@
 import { useContext } from "react";
-import { Stack, Avatar, Button, IconButton, Tooltip } from "@mui/material";
-import {
-  LightMode,
-  Person,
-  FavoriteBorder,
-  DarkMode,
-  Login,
-  Logout,
-  LocalMallOutlined,
-} from "@mui/icons-material";
+import { Stack, IconButton, Tooltip } from "@mui/material";
+import { LightMode, DarkMode } from "@mui/icons-material";
 import ThemeContext from "../../store/theme-context";
 import LiveSearch from "../LiveSearch";
-import { Link } from "react-router-dom";
 import AuthContext from "../../store/Auth-context";
 import WishlistButton from "./WishlistButton";
 import CartButton from "./CartButton";
 import AuthButton from "./AuthButton";
+import UserAvatar from "./UserAvatar";
 
 const MainNavButtons = () => {
   const { mode, toggleMode } = useContext(ThemeContext);
   const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   return (
-    <Stack direction="row" spacing={4} alignItems="center">
+    <Stack direction="row" spacing={4} alignItems="center" component="nav">
       <LiveSearch />
 
       <WishlistButton />
@@ -31,19 +23,8 @@ const MainNavButtons = () => {
 
       <AuthButton isAuthenticated={isAuthenticated} logout={logout} />
 
-      {isAuthenticated && (
-        <Tooltip title="User profile">
-          <Link to="/user-profile">
-            <Avatar>
-              {user?.image ? (
-                <img src={user.image} alt="user " width="100%" />
-              ) : (
-                <Person />
-              )}
-            </Avatar>
-          </Link>
-        </Tooltip>
-      )}
+      {isAuthenticated && <UserAvatar userImg={user?.image} />}
+
       <Tooltip title={mode === "dark" ? "Light mode" : "Dark mode"}>
         <IconButton onClick={toggleMode} color="inherit">
           {mode === "dark" ? <LightMode /> : <DarkMode />}
