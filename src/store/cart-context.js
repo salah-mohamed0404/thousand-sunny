@@ -1,39 +1,49 @@
 const { createContext, useState, useEffect, useCallback } = require("react");
 
 const CartContext = createContext({
-  cartProductIds: [],
+  cartProducts: [],
   addToCart: () => {},
   removeFromCart: () => {},
 });
 
 export const CartContextProvider = ({ children }) => {
-  const [productIds, setProductIds] = useState([]);
+  const [products, setProducts] = useState([]);
   const localStorageRecordName = "1000sunny-cart";
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem(localStorageRecordName));
 
-    if (storedCart) setProductIds(storedCart);
+    if (storedCart) setProducts(storedCart);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(localStorageRecordName, JSON.stringify(productIds));
-  }, [productIds]);
+  const addToCart = useCallback(
+    (product) => {
+      const newProducts = [...products, product];
+      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
 
-  const addToCart = useCallback((productId) => {
-    setProductIds((prevProductIds) => [...prevProductIds, productId]);
-  }, []);
+      setProducts((prevProducts) => [...prevProducts, product]);
+    },
+    [products]
+  );
 
-  const removeFromCart = useCallback((productId) => {
-    setProductIds((prevProductIds) =>
-      prevProductIds.filter((prevProductId) => prevProductId !== productId)
-    );
-  }, []);
+  const removeFromCart = useCallback(
+    (product) => {
+      const newProducts = products.filter(
+        (prevProduct) => prevProduct.id !== product.id
+      );
+      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
+
+      setProducts((prevProducts) =>
+        prevProducts.filter((prevProduct) => prevProduct.id !== product.id)
+      );
+    },
+    [products]
+  );
 
   return (
     <CartContext.Provider
       value={{
-        cartProductIds: productIds,
+        cartProducts: products,
         addToCart,
         removeFromCart,
       }}

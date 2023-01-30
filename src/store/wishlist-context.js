@@ -1,13 +1,13 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 
 const WishlistContext = createContext({
-  wishlistProductIds: [],
+  wishlistProducts: [],
   addToWishlist: () => {},
   removeFromWishlist: () => {},
 });
 
 export const WishlistContextProvider = ({ children }) => {
-  const [productIds, setProductIds] = useState([]);
+  const [products, setProducts] = useState([]);
   const localStorageRecordName = "1000sunnt-wishlist";
 
   useEffect(() => {
@@ -15,27 +15,37 @@ export const WishlistContextProvider = ({ children }) => {
       localStorage.getItem(localStorageRecordName)
     );
 
-    if (storedWishlist) setProductIds(storedWishlist);
+    if (storedWishlist) setProducts(storedWishlist);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(localStorageRecordName, JSON.stringify(productIds));
-  }, [productIds]);
+  const addToWishlist = useCallback(
+    (product) => {
+      const newProducts = [...products, product];
+      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
 
-  const addToWishlist = useCallback((productId) => {
-    setProductIds((prevProductIds) => [...prevProductIds, productId]);
-  }, []);
+      setProducts((prevProducts) => [...prevProducts, product]);
+    },
+    [products]
+  );
 
-  const removeFromWishlist = useCallback((productId) => {
-    setProductIds((prevProductIds) =>
-      prevProductIds.filter((prevProductId) => prevProductId !== productId)
-    );
-  }, []);
+  const removeFromWishlist = useCallback(
+    (product) => {
+      const newProducts = products.filter(
+        (prevProduct) => prevProduct.id !== product.id
+      );
+      localStorage.setItem(localStorageRecordName, JSON.stringify(newProducts));
+
+      setProducts((prevProducts) =>
+        prevProducts.filter((prevProduct) => prevProduct.id !== product.id)
+      );
+    },
+    [products]
+  );
 
   return (
     <WishlistContext.Provider
       value={{
-        wishlistProductIds: productIds,
+        wishlistProducts: products,
         addToWishlist,
         removeFromWishlist,
       }}
