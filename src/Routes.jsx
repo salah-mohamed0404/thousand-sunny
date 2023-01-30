@@ -2,6 +2,8 @@ import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthenticatedRoute from "./components/CheckAuthRoutes/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/CheckAuthRoutes/UnauthenticatedRoute";
+import Cart from "./containers/Cart";
+import Wishlist from "./containers/Wishlist";
 const Home = lazy(() => import("./containers/Home"));
 const Login = lazy(() => import("./containers/Login"));
 const SignUp = lazy(() => import("./containers/SignUp"));
@@ -34,6 +36,22 @@ export default function Links() {
           />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route
+            path="/wishlist"
+            element={
+              <AuthenticatedRoute>
+                <Wishlist />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <AuthenticatedRoute>
+                <Cart />
+              </AuthenticatedRoute>
+            }
+          />
           <Route
             path="/user-profile"
             element={
