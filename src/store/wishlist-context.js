@@ -1,13 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 const WishlistContext = createContext({
-  WishlistProducts: [],
+  wishlistProductIds: [],
   addToWishlist: () => {},
   removeFromWishlist: () => {},
 });
 
 export const WishlistContextProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [productIds, setProductIds] = useState([]);
   const localStorageRecordName = "1000sunnt-wishlist";
 
   useEffect(() => {
@@ -15,29 +15,29 @@ export const WishlistContextProvider = ({ children }) => {
       localStorage.getItem(localStorageRecordName)
     );
 
-    if (storedWishlist) setProducts(storedWishlist);
+    if (storedWishlist) setProductIds(storedWishlist);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(localStorageRecordName, JSON.stringify(products));
-  }, [products]);
+    localStorage.setItem(localStorageRecordName, JSON.stringify(productIds));
+  }, [productIds]);
 
-  const addToCart = (product) => {
-    setProducts((prevProducts) => [...prevProducts, product]);
-  };
+  const addToWishlist = useCallback((productId) => {
+    setProductIds((prevProductIds) => [...prevProductIds, productId]);
+  }, []);
 
-  const removeFromCart = (productId) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId)
+  const removeFromWishlist = useCallback((productId) => {
+    setProductIds((prevProductIds) =>
+      prevProductIds.filter((prevProductId) => prevProductId !== productId)
     );
-  };
+  }, []);
 
   return (
     <WishlistContext.Provider
       value={{
-        wishlistProducts: products,
-        addToCart,
-        removeFromCart,
+        wishlistProductIds: productIds,
+        addToWishlist,
+        removeFromWishlist,
       }}
     >
       {children}

@@ -1,39 +1,39 @@
-const { createContext, useState, useEffect } = require("react");
+const { createContext, useState, useEffect, useCallback } = require("react");
 
 const CartContext = createContext({
-  cartProducts: [],
+  cartProductIds: [],
   addToCart: () => {},
   removeFromCart: () => {},
 });
 
 export const CartContextProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [productIds, setProductIds] = useState([]);
   const localStorageRecordName = "1000sunny-cart";
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem(localStorageRecordName));
 
-    if (storedCart) setProducts(storedCart);
+    if (storedCart) setProductIds(storedCart);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(localStorageRecordName, JSON.stringify(products));
-  }, [products]);
+    localStorage.setItem(localStorageRecordName, JSON.stringify(productIds));
+  }, [productIds]);
 
-  const addToCart = (product) => {
-    setProducts((prevProducts) => [...prevProducts, product]);
-  };
+  const addToCart = useCallback((productId) => {
+    setProductIds((prevProductIds) => [...prevProductIds, productId]);
+  }, []);
 
-  const removeFromCart = (productId) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId)
+  const removeFromCart = useCallback((productId) => {
+    setProductIds((prevProductIds) =>
+      prevProductIds.filter((prevProductId) => prevProductId !== productId)
     );
-  };
+  }, []);
 
   return (
     <CartContext.Provider
       value={{
-        cartProducts: products,
+        cartProductIds: productIds,
         addToCart,
         removeFromCart,
       }}
