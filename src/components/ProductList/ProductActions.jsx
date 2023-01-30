@@ -39,6 +39,7 @@ const ProductActions = ({ product }) => {
         <ChangeQuantityActions
           isInCart={isInCart}
           product={product}
+          cartProducts={cartProducts}
           changeQuantity={changeQuantity}
           handleRemoveFromCart={handleRemoveFromCart}
         />
