@@ -5,10 +5,12 @@ const CartContext = createContext({
   addToCart: () => {},
   removeFromCart: () => {},
   changeQuantity: () => {},
+  totalPrice: 0,
 });
 
 export const CartContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const localStorageRecordName = "1000sunny-cart";
 
   useEffect(() => {
@@ -16,6 +18,15 @@ export const CartContextProvider = ({ children }) => {
 
     if (storedCart) setProducts(storedCart);
   }, []);
+
+  useEffect(() => {
+    const totalPrice = products.reduce(
+      (total, product) =>
+        total + product.price * (product?.quantity ? product.quantity : 1),
+      0
+    );
+    setTotalPrice(totalPrice);
+  }, [products]);
 
   const addToCart = useCallback((product) => {
     setProducts((prevProducts) => {
@@ -70,6 +81,7 @@ export const CartContextProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         changeQuantity,
+        totalPrice,
       }}
     >
       {children}
