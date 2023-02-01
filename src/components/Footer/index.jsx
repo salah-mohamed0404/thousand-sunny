@@ -33,7 +33,7 @@ const Footer = () => {
         title="Account"
         links={[
           {
-            href: "#",
+            href: "/signup",
             text: "Create Account",
           },
           { to: "/login", text: "Log in" },
