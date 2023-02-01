@@ -1,7 +1,6 @@
 import { Badge, Grid } from "@mui/material";
 import ItemWapper from "./ItemWapper";
-import ProductActions from "./ProductActions";
-import ProductCardActionArea from "./ProductCardActionArea";
+import ProductBody from "./ProductBody";
 
 const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
   return (
@@ -27,9 +26,7 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
             }}
           />
 
-          <ProductCardActionArea product={product} />
-
-          <ProductActions product={product} />
+          <ProductBody product={product} />
         </ItemWapper>
       ))}
     </Grid>
