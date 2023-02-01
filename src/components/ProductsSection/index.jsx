@@ -3,17 +3,39 @@ import Loading from "../Loading";
 import ProductFilter from "./ProductFilter";
 import ProductsList from "../ProductList";
 import ProductSorter from "./ProductSorter";
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 
-const index = ({ loading, products, handleProducts, fetchProducts }) => {
+const Index = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchProducts = useCallback(async (skip = 0) => {
+    setLoading(true);
+
+    const url = `https://dummyjson.com/products?limit=30&skip=${skip}`;
+    const res = await axios.get(url);
+
+    setProducts(res.data.products);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  const handleProducts = useCallback((products) => {
+    setProducts(products);
+  }, []);
+
   return (
     <Container component="section">
-      <Stack>
+      <Stack spacing={3}>
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="space-between"
           py={2}
-          mb={3}
           borderBottom="1px solid"
           borderColor="divider"
         >
@@ -22,11 +44,7 @@ const index = ({ loading, products, handleProducts, fetchProducts }) => {
             handleProducts={handleProducts}
             fetchProducts={fetchProducts}
           />
-          <ProductSorter
-            products={products}
-            handleProducts={handleProducts}
-            fetchProducts
-          />
+          <ProductSorter handleProducts={handleProducts} />
         </Stack>
 
         {!loading ? (
@@ -43,4 +61,4 @@ const index = ({ loading, products, handleProducts, fetchProducts }) => {
   );
 };
 
-export default index;
+export default Index;
