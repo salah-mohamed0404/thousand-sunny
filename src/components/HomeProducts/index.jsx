@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Products from "./Products";
 import { useContext } from "react";
