@@ -74,12 +74,7 @@ const CartButton = () => {
 
         <Divider />
         <DialogActions sx={{ justifyContent: "space-between" }}>
-          <Typography
-            px={2}
-            py={1}
-            border="2px solid"
-            borderColor="primary.main"
-          >
+          <Typography variant="h6" component="p" px={2}>
             Total price: {totalPrice.toFixed(2)}
           </Typography>
           <Button color="inherit">Show detail and Check out</Button>
