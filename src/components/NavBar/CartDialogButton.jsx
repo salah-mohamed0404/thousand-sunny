@@ -12,14 +12,15 @@ import {
   IconButton,
   Slide,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import ProductsList from "../ProductList";
 
 const CartButton = () => {
-  const [open, setOpen] = useState(true);
-  const { cartProducts } = useContext(CartContext);
+  const [open, setOpen] = useState(false);
+  const { cartProducts, totalPrice } = useContext(CartContext);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -66,7 +67,15 @@ const CartButton = () => {
         </DialogContent>
 
         <Divider />
-        <DialogActions>
+        <DialogActions sx={{ justifyContent: "space-between" }}>
+          <Typography
+            px={2}
+            py={1}
+            border="2px solid"
+            borderColor="primary.main"
+          >
+            Total price: {totalPrice.toFixed(2)}
+          </Typography>
           <Button color="inherit">Show detail and Check out</Button>
         </DialogActions>
       </Dialog>
