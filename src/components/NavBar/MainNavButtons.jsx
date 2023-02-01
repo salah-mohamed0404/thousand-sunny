@@ -5,7 +5,7 @@ import ThemeContext from "../../store/theme-context";
 import LiveSearch from "../LiveSearch";
 import AuthContext from "../../store/Auth-context";
 import WishlistButton from "./WishlistButton";
-import CartButton from "./CartButton";
+import CartDialogButton from "./CartDialogButton";
 import AuthButton from "./AuthButton";
 import UserAvatar from "./UserAvatar";
 
@@ -19,7 +19,7 @@ const MainNavButtons = () => {
 
       <WishlistButton />
 
-      <CartButton />
+      <CartDialogButton />
 
       <AuthButton isAuthenticated={isAuthenticated} logout={logout} />
 
