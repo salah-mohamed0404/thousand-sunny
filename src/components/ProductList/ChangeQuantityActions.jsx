@@ -18,19 +18,15 @@ const ChangeQuantityActions = ({
   }, [cartProducts, product.id, setQuantity]);
 
   useEffect(() => {
+    if (quantity === "") return;
     if (quantity <= 0) handleRemoveFromCart();
   }, [quantity, handleRemoveFromCart]);
 
   const handleChange = (e) => {
-    let value = e.target.value;
-
-    if (isNaN(value)) return;
-
-    value = parseInt(value);
+    const value = parseInt(e.target.value);
 
     if (isNaN(value)) {
-      setQuantity(0);
-      changeQuantity(product.id, 0);
+      setQuantity("");
       return;
     }
 
