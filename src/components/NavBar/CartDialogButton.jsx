@@ -62,7 +62,13 @@ const CartButton = () => {
             Here you will find all product you attended to buy
           </DialogContentText>
           <Box sx={{ maxHeight: 500 }} overflow="auto">
-            <ProductsList products={cartProducts} breakpoints={{ md: 3 }} />
+            {cartProducts.length === 0 ? (
+              <Typography variant="h5" p={5}>
+                There isn't any product in the cart yet. Please, add some🥰
+              </Typography>
+            ) : (
+              <ProductsList products={cartProducts} breakpoints={{ md: 3 }} />
+            )}
           </Box>
         </DialogContent>
 
