@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ProductContent from "./ProductContent";
 import placeholderImg from "../../assets/placeholder.jpg";
 
-const ProductCardActionArea = ({ product }) => {
+const ProductCardActionArea = ({ product, quantity }) => {
   return (
     <CardActionArea
       sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
@@ -29,6 +29,7 @@ const ProductCardActionArea = ({ product }) => {
           price={product.price}
           discount={product.discountPercentage}
           rating={product.rating}
+          quantity={quantity}
         />
       </Link>
     </CardActionArea>

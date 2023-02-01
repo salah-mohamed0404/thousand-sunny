@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Add, Remove } from "@mui/icons-material";
 import { IconButton, Stack, TextField } from "@mui/material";
 import { useEffect } from "react";
@@ -9,14 +8,14 @@ const ChangeQuantityActions = ({
   product,
   cartProducts,
   handleRemoveFromCart,
+  quantity,
+  setQuantity,
 }) => {
-  const [quantity, setQuantity] = useState(1);
-
   useEffect(() => {
     const cartProduct = cartProducts.find((item) => item.id === product.id);
     const productQuantity = cartProduct?.quantity;
     if (productQuantity) setQuantity(productQuantity);
-  }, [cartProducts, product.id]);
+  }, [cartProducts, product.id, setQuantity]);
 
   useEffect(() => {
     if (quantity <= 0) handleRemoveFromCart();

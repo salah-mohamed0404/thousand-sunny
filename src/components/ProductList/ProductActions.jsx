@@ -6,7 +6,7 @@ import CartButton from "./CartButton";
 import ChangeQuantityActions from "./ChangeQuantityActions";
 import { useCallback } from "react";
 
-const ProductActions = ({ product }) => {
+const ProductActions = ({ product, quantity, setQuantity }) => {
   const { cartProducts, addToCart, removeFromCart, changeQuantity } =
     useContext(CartContext);
 
@@ -42,6 +42,8 @@ const ProductActions = ({ product }) => {
           cartProducts={cartProducts}
           changeQuantity={changeQuantity}
           handleRemoveFromCart={handleRemoveFromCart}
+          quantity={quantity}
+          setQuantity={setQuantity}
         />
 
         <WishlistButton product={product} />

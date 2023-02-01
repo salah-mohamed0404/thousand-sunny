@@ -1,6 +1,6 @@
 import { Box, CardContent, Rating, Stack, Typography } from "@mui/material";
 
-const ProductContent = ({ title, price, discount, rating = 0 }) => {
+const ProductContent = ({ title, price, discount, rating = 0, quantity }) => {
   return (
     <CardContent component={Stack} justifyContent="space-between" flexGrow={1}>
       <Box>
@@ -33,10 +33,14 @@ const ProductContent = ({ title, price, discount, rating = 0 }) => {
             fontWeight={500}
             sx={{ textDecoration: discount > 0 ? "line-through" : "none" }}
           >
-            $ {price.toFixed(2)}
+            $ {quantity ? (quantity * price).toFixed(2) : price.toFixed(2)}
           </Typography>
           <Typography variant="h6" component="div" fontWeight={500}>
-            $ {(price * ((discount - 1) / 100)).toFixed(2)}
+            ${" "}
+            {(
+              (quantity ? quantity * price : price) *
+              ((discount - 1) / 100)
+            ).toFixed(2)}
           </Typography>
         </Stack>
       </Stack>
