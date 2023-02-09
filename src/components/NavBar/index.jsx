@@ -1,25 +1,18 @@
-import { useEffect, useState, lazy, Suspense, memo } from "react";
-const MainNav = lazy(() => import("./MainNav"));
+import { lazy, Suspense, memo, useContext } from "react";
+import ThemeContext from "../../store/theme-context";
+import MainNav from "./MainNav";
+
 const MobileNav = lazy(() => import("./MobileNav"));
 
 const NavBar = () => {
-  const [isDesktop, setDesktop] = useState(false);
+  const { isDesktop } = useContext(ThemeContext);
 
-  useEffect(() => {
-    const updateMedia = () => {
-      if (window.innerWidth > 900) {
-        setDesktop(true);
-      } else {
-        setDesktop(false);
-      }
-    };
-    updateMedia();
-
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  }, []);
-
-  return <Suspense>{isDesktop ? <MainNav /> : <MobileNav />}</Suspense>;
+  return (
+    <Suspense>
+      <MainNav />
+      {!isDesktop && <MobileNav />}
+    </Suspense>
+  );
 };
 
 export default memo(NavBar);
