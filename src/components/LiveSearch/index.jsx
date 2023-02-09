@@ -4,7 +4,7 @@ import ThemeContext from "../../store/theme-context";
 import ToggleSearchBtn from "./ToggleSearchBtn";
 import AutoCompleteSearch from "./AutoCompleteSearch";
 
-function LiveSearch() {
+function LiveSearch({ expanded = false }) {
   const [focus, setFocus] = useState(false);
   const [searchRes, setSearchRes] = useState(null);
   const [openSearch, setOpenSearch] = useState(false);
@@ -23,7 +23,7 @@ function LiveSearch() {
   return (
     <Box position="relative">
       <AutoCompleteSearch
-        openSearch={openSearch}
+        openSearch={!expanded ? openSearch : expanded}
         searchRes={searchRes}
         handleSearchRes={handleSearchRes}
         handleFocus={() => setFocus(true)}
@@ -31,12 +31,14 @@ function LiveSearch() {
         mode={mode}
       />
 
-      <ToggleSearchBtn
-        openSearch={openSearch}
-        toggleSearch={toggleSearch}
-        focus={focus}
-        mode={mode}
-      />
+      {!expanded && (
+        <ToggleSearchBtn
+          openSearch={openSearch}
+          toggleSearch={toggleSearch}
+          focus={focus}
+          mode={mode}
+        />
+      )}
     </Box>
   );
 }
