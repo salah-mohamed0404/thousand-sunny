@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import AuthContext from "../../store/Auth-context";
@@ -94,4 +94,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default memo(LoginForm);

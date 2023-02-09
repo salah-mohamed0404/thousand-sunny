@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { memo, useContext, useState } from "react";
 import axios from "axios";
 import EmailTextField from "./EmailTextField";
 import FormButtons from "./FormButtons";
@@ -146,4 +146,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default memo(SignUpForm);

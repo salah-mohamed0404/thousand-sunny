@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import { Box } from "@mui/material";
 import ThemeContext from "../../store/theme-context";
 import ToggleSearchBtn from "./ToggleSearchBtn";
@@ -41,4 +41,4 @@ function LiveSearch() {
   );
 }
 
-export default LiveSearch;
+export default memo(LiveSearch);

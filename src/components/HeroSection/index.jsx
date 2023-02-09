@@ -1,3 +1,4 @@
+import { memo } from "react";
 import HeroWrapper from "./HeroWrapper";
 import PrimaryCol from "./PrimaryCol";
 import SecodaryCol from "./SecodaryCol";
@@ -11,4 +12,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default memo(HeroSection);

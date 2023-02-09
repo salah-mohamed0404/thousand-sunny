@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense, memo } from "react";
 const MainNav = lazy(() => import("./MainNav"));
 const MobileNav = lazy(() => import("./MobileNav"));
 
@@ -22,4 +22,4 @@ const NavBar = () => {
   return <Suspense>{isDesktop ? <MainNav /> : <MobileNav />}</Suspense>;
 };
 
-export default NavBar;
+export default memo(NavBar);

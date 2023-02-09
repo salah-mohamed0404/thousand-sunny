@@ -1,6 +1,7 @@
 import LogoCol from "./LogoCol";
 import LinksCol from "./LinksCol";
 import FooterContainer from "./FooterContainer";
+import { memo } from "react";
 
 const location = "cell 102, level 6, Impel down";
 
@@ -33,7 +34,7 @@ const Footer = () => {
         title="Account"
         links={[
           {
-            href: "/signup",
+            to: "/signup",
             text: "Create Account",
           },
           { to: "/login", text: "Log in" },
@@ -52,16 +53,16 @@ const Footer = () => {
         title="Company"
         links={[
           {
-            href: "#",
+            to: "/about",
             text: "About 1000Sunny",
           },
-          { href: "#", text: "For business" },
+          { to: "/for-business", text: "For business" },
           {
-            href: "#",
+            to: "/partners",
             text: "Partners",
           },
           {
-            href: "#",
+            to: "/careers",
             text: "Careers",
           },
         ]}
@@ -74,9 +75,9 @@ const Footer = () => {
             to: "/products",
             text: "Products",
           },
-          { href: "#", text: "Help center" },
+          { to: "/support", text: "Help center" },
           {
-            href: "#",
+            to: "/privacy&terms",
             text: "Privacy & terms",
           },
         ]}
@@ -85,4 +86,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

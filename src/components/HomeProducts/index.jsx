@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, memo, Suspense } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import Products from "./Products";
 import { useContext } from "react";
@@ -24,4 +24,4 @@ const HomeProducts = () => {
   );
 };
 
-export default HomeProducts;
+export default memo(HomeProducts);

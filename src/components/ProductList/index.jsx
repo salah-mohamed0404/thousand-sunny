@@ -1,4 +1,5 @@
 import { Badge, Grid } from "@mui/material";
+import { memo } from "react";
 import ItemWapper from "./ItemWapper";
 import ProductBody from "./ProductBody";
 
@@ -33,4 +34,4 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
   );
 };
 
-export default ProductsList;
+export default memo(ProductsList);

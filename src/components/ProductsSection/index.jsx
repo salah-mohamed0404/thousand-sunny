@@ -3,10 +3,10 @@ import Loading from "../Loading";
 import ProductFilter from "./ProductFilter";
 import ProductsList from "../ProductList";
 import ProductSorter from "./ProductSorter";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-const Index = () => {
+const ProductSection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -61,4 +61,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default memo(ProductSection);
