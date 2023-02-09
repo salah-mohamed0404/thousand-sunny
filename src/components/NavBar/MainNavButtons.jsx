@@ -15,7 +15,7 @@ const MainNavButtons = () => {
 
   return (
     <Stack direction="row" spacing={4} alignItems="center" component="nav">
-      <Stack width={300}>
+      <Stack width={250}>
         <LiveSearch />
       </Stack>
 
