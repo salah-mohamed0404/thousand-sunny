@@ -37,12 +37,13 @@ const AutoCompleteSearch = ({
       loading={loading}
       open={open}
       sx={{
-        width: 300,
+        MaxWidth: 300,
         scale: openSearch ? 1 : 0,
         transition: "scale 0.3s",
         py: 2,
       }}
       freeSolo
+      fullWidth
       autoComplete
       openOnFocus
       disableClearable
