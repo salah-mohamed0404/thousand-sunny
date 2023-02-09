@@ -1,16 +1,11 @@
 import { useContext } from "react";
-import { Stack, IconButton, Tooltip } from "@mui/material";
-import { LightMode, DarkMode } from "@mui/icons-material";
-import ThemeContext from "../../store/theme-context";
+import { Stack } from "@mui/material";
 import LiveSearch from "../LiveSearch";
 import AuthContext from "../../store/Auth-context";
-import WishlistButton from "./WishlistButton";
-import CartDialogButton from "./CartDialogButton";
-import AuthButton from "./AuthButton";
 import UserAvatar from "./UserAvatar";
+import { AuthButton, CartButton, ModeButton, WishlistButton } from "./Buttons";
 
 const MainNavButtons = () => {
-  const { mode, toggleMode } = useContext(ThemeContext);
   const { user, isAuthenticated, logout } = useContext(AuthContext);
 
   return (
@@ -19,17 +14,13 @@ const MainNavButtons = () => {
 
       <WishlistButton />
 
-      <CartDialogButton />
+      <CartButton />
 
       <AuthButton isAuthenticated={isAuthenticated} logout={logout} />
 
       {isAuthenticated && <UserAvatar userImg={user?.image} />}
 
-      <Tooltip title={mode === "dark" ? "Light mode" : "Dark mode"}>
-        <IconButton onClick={toggleMode} color="inherit">
-          {mode === "dark" ? <LightMode /> : <DarkMode />}
-        </IconButton>
-      </Tooltip>
+      <ModeButton />
     </Stack>
   );
 };
