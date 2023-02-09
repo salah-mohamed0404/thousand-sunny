@@ -6,6 +6,16 @@ const SearchTextField = ({ params, mode, loading }) => {
   return (
     <TextField
       {...params}
+      sx={{
+        ".MuiInput-root::before": {
+          borderColor: mode === "dark" ? "text.primary" : red[50],
+        },
+        ".MuiInput-root:hover::before": {
+          borderColor: `${
+            mode === "dark" ? "text.primary" : red[50]
+          } !important`,
+        },
+      }}
       variant="standard"
       label="Search"
       InputLabelProps={{
