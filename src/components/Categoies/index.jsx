@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Divider, Stack, Typography } from "@mui/material";
 import axios from "axios";
 
-const Categories = () => {
+const Categories = ({ maxHeight = 430 }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Categories = () => {
       <Stack
         spacing={2}
         divider={<Divider flexItem />}
-        maxHeight={430}
+        maxHeight={maxHeight}
         p={2}
         sx={{
           overflowY: "scroll",

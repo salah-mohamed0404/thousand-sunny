@@ -3,7 +3,7 @@ import { Box, Container, Grid } from "@mui/material";
 import Products from "./Products";
 import { useContext } from "react";
 import ThemeContext from "../../store/theme-context";
-const Categories = lazy(() => import("./Categories"));
+const Categories = lazy(() => import("../Categoies"));
 
 const HomeProducts = () => {
   const { isDesktop } = useContext(ThemeContext);
