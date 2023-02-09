@@ -27,23 +27,23 @@ export const ThemeContextProvider = ({ children }) => {
     if (storedMode) setMode(storedMode);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(modeStorageField, mode);
-  }, [mode]);
-
   const getDesignTokens = useCallback(
     (mode) => ({
       palette: {
         mode,
         primary: { main: red[900] },
-        background: { paper: mode === "light" ? grey[100] : grey[900] },
+        background: { paper: mode === "light" ? grey[50] : grey[900] },
       },
     }),
     []
   );
 
   const toggleMode = useCallback(() => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) => {
+      const currentMode = prevMode === "light" ? "dark" : "light";
+      localStorage.setItem(modeStorageField, currentMode);
+      return currentMode;
+    });
   }, []);
 
   const theme = useMemo(
