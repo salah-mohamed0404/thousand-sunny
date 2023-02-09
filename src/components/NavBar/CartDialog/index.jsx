@@ -18,7 +18,7 @@ const CartDialog = ({ open, handleClose }) => {
 
       <Divider />
 
-      <CartDialogActions totalPrice={totalPrice} />
+      <CartDialogActions totalPrice={totalPrice} handleClose={handleClose} />
     </DialogContainer>
   );
 };
