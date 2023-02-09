@@ -1,4 +1,5 @@
 import { Box, Container, Paper, Stack, Typography } from "@mui/material";
+import { memo } from "react";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
@@ -23,4 +24,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

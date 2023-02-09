@@ -2,6 +2,8 @@ import { Stack } from "@mui/material";
 import HeroSection from "../components/HeroSection";
 import Features from "../components/Features";
 import HomeProducts from "../components/HomeProducts";
+import HelpSupportSection from "../components/HelpSupportSection";
+import { memo } from "react";
 
 const Home = () => {
   return (
@@ -9,8 +11,9 @@ const Home = () => {
       <HeroSection />
       <Features />
       <HomeProducts />
+      <HelpSupportSection />
     </Stack>
   );
 };
 
-export default Home;
+export default memo(Home);

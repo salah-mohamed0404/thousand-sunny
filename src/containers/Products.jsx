@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { memo } from "react";
 import ProductsSection from "../components/ProductsSection";
 
 const Products = () => {
@@ -19,4 +20,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default memo(Products);
