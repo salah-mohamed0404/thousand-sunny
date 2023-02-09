@@ -12,9 +12,9 @@ const HeroWrapper = ({ children }) => {
       py={7}
       sx={{
         backgroundImage: `linear-gradient(to bottom right, ${alpha(
-          grey[500],
-          mode === "dark" ? 0.4 : 0.1
-        )} , ${alpha(grey[400], mode === "dark" ? 0.4 : 0.1)}), url(${tech})`,
+          grey[700],
+          mode === "dark" ? 0.5 : 0.1
+        )} , ${alpha(grey[600], mode === "dark" ? 0.5 : 0.1)}), url(${tech})`,
         backgroundSize: "cover",
       }}
       component="section"
