@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Divider, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import axios from "axios";
+import Title from "./Title";
+import CategoryContainer from "./CategoryContainer";
+import Category from "./Category";
 
 const Categories = ({ maxHeight = 430 }) => {
   const [categories, setCategories] = useState([]);
@@ -16,35 +18,13 @@ const Categories = ({ maxHeight = 430 }) => {
 
   return (
     <Stack border="1px solid" borderColor="text.secondary">
-      <Typography
-        variant="h5"
-        color="whitesmoke"
-        bgcolor="text.secondary"
-        p={1}
-        textAlign="center"
-      >
-        Categories
-      </Typography>
-      <Stack
-        spacing={2}
-        divider={<Divider flexItem />}
-        maxHeight={maxHeight}
-        p={2}
-        sx={{
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": { width: 10 },
-          "&::-webkit-scrollbar-track": { bgcolor: "lightgray" },
-          "&::-webkit-scrollbar-thumb": { bgcolor: "grey" },
-        }}
-      >
+      <Title />
+
+      <CategoryContainer maxHeight={maxHeight}>
         {categories.map((category) => (
-          <Link to={`/products?category=${category}`} key={category}>
-            <Typography px={1} textTransform="capitalize">
-              {category.replace("-", " ")}
-            </Typography>
-          </Link>
+          <Category category={category} />
         ))}
-      </Stack>
+      </CategoryContainer>
     </Stack>
   );
 };
