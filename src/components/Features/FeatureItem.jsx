@@ -4,7 +4,6 @@ import React from "react";
 const FeatureItem = ({ Icon, title, description }) => {
   return (
     <Stack
-      key={title}
       direction="row"
       justifyContent={{ md: "center" }}
       alignItems="center"

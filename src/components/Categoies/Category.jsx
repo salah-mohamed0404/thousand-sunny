@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Category = ({ category }) => {
   return (
-    <Link to={`/products?category=${category}`} key={category}>
+    <Link to={`/products?category=${category}`}>
       <Typography px={1} textTransform="capitalize">
         {category.replace("-", " ")}
       </Typography>

@@ -22,7 +22,7 @@ const Categories = ({ maxHeight = 430 }) => {
 
       <CategoryContainer maxHeight={maxHeight}>
         {categories.map((category) => (
-          <Category category={category} />
+          <Category key={category} category={category} />
         ))}
       </CategoryContainer>
     </Stack>

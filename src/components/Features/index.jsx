@@ -7,7 +7,12 @@ const Features = () => {
   return (
     <FeaturesContainer>
       {features.map(({ Icon, title, description }) => (
-        <FeatureItem Icon={Icon} title={title} description={description} />
+        <FeatureItem
+          key={title}
+          Icon={Icon}
+          title={title}
+          description={description}
+        />
       ))}
     </FeaturesContainer>
   );
