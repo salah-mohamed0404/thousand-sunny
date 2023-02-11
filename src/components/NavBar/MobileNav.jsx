@@ -32,8 +32,7 @@ const MobileNav = () => {
     if (pathname === "/") setActive(0);
     else if (pathname === "/wishlist") setActive(1);
     else if (pathname === "/cart") setActive(2);
-    else if (pathname === "/user-profile") setActive(3);
-    else if (pathname === "/login") setActive(4);
+    else if (pathname === "/login") setActive(3);
   }, [pathname]);
 
   return (
