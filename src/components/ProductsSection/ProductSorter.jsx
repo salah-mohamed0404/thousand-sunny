@@ -8,50 +8,21 @@ import {
   RadioGroup,
   Stack,
 } from "@mui/material";
-import { useEffect } from "react";
-import { useCallback, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
-const ProductSorter = ({ handleProducts, isProductsFetched }) => {
-  const [priceOrder, setPriceOrder] = useState(null);
+const ProductSorter = ({ updateSearchParams, priceOrderParam }) => {
+  const [priceOrder, setPriceOrder] = useState(priceOrderParam);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const SortPriceASC = useCallback(() => {
-    handleProducts((prevProducts) =>
-      [...prevProducts].sort((a, b) => a.price - b.price)
-    );
-  }, [handleProducts]);
-
-  const SortPriceDESC = useCallback(() => {
-    handleProducts((prevProducts) =>
-      [...prevProducts].sort((a, b) => b.price - a.price)
-    );
-  }, [handleProducts]);
-
-  useEffect(() => {
-    if (!isProductsFetched) return;
-
-    if (priceOrder === null) setPriceOrder(searchParams.get("priceOrder"));
-    if (priceOrder === "asc") SortPriceASC();
-    if (priceOrder === "desc") SortPriceDESC();
-    if (priceOrder)
-      setSearchParams((prev) => {
-        prev.set("priceOrder", priceOrder);
-        return prev;
-      });
-  }, [
-    priceOrder,
-    SortPriceASC,
-    SortPriceDESC,
-    searchParams,
-    setSearchParams,
-    isProductsFetched,
-  ]);
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleChange = (e) => {
+    const selectedPriceOrder = e.target.value;
+    setPriceOrder(selectedPriceOrder);
+    updateSearchParams("priceOrder", selectedPriceOrder);
   };
 
   return (
@@ -87,7 +58,7 @@ const ProductSorter = ({ handleProducts, isProductsFetched }) => {
               aria-labelledby="price-sort-radio-button"
               name="price-sort-radio-buttons-group"
               value={priceOrder}
-              onChange={(e) => setPriceOrder(e.target.value)}
+              onChange={handleChange}
             >
               <FormControlLabel
                 value="asc"
