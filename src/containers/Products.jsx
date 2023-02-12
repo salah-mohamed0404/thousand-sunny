@@ -9,8 +9,8 @@ const Products = () => {
         variant="h2"
         color="primary.main"
         textAlign="center"
-        p={2}
-        gutterBottom
+        px={2}
+        py={4}
       >
         In your service
       </Typography>
