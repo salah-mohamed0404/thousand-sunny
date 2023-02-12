@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import axios from "axios";
+import { useCallback } from "react";
 import { useState, useEffect, forwardRef } from "react";
 import FilterForm from "./FilterForm";
 
@@ -15,9 +16,15 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ProductFilter = ({ products = [], handleProducts, fetchProducts }) => {
+const ProductFilter = ({ updateSearchParams, priceRangePararm }) => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState(
+    priceRangePararm
+      ? priceRangePararm.split(",").map((item) => parseInt(item))
+      : [0, 2000]
+  );
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -29,7 +36,12 @@ const ProductFilter = ({ products = [], handleProducts, fetchProducts }) => {
   }, []);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    updateSearchParams("price", priceRange.join(","));
+    if (selectedCategory) updateSearchParams("category", selectedCategory);
+  }, [priceRange, selectedCategory, updateSearchParams]);
 
   return (
     <div>
@@ -55,7 +67,13 @@ const ProductFilter = ({ products = [], handleProducts, fetchProducts }) => {
             Custmize your search as you like (filter with categories doesn't
             work with other filters)
           </DialogContentText>
-          <FilterForm categories={categories} />
+          <FilterForm
+            categories={categories}
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </DialogContent>
       </Dialog>
     </div>
