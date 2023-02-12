@@ -106,7 +106,7 @@ const ProductSection = () => {
         {!loading ? (
           <ProductsList
             products={products}
-            breakpoints={{ xs: 3 }}
+            breakpoints={{ sx: 12, sm: 5, md: 3 }}
             col={12.75}
           />
         ) : (
