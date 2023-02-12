@@ -10,11 +10,13 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { useCallback, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
-const ProductSorter = ({ handleProducts }) => {
+const ProductSorter = ({ handleProducts, isProductsFetched }) => {
   const [priceOrder, setPriceOrder] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const SortPriceASC = useCallback(() => {
     handleProducts((prevProducts) =>
@@ -29,9 +31,24 @@ const ProductSorter = ({ handleProducts }) => {
   }, [handleProducts]);
 
   useEffect(() => {
+    if (!isProductsFetched) return;
+
+    if (priceOrder === null) setPriceOrder(searchParams.get("priceOrder"));
     if (priceOrder === "asc") SortPriceASC();
     if (priceOrder === "desc") SortPriceDESC();
-  }, [priceOrder, SortPriceASC, SortPriceDESC]);
+    if (priceOrder)
+      setSearchParams((prev) => {
+        prev.set("priceOrder", priceOrder);
+        return prev;
+      });
+  }, [
+    priceOrder,
+    SortPriceASC,
+    SortPriceDESC,
+    searchParams,
+    setSearchParams,
+    isProductsFetched,
+  ]);
 
   const handleClose = () => {
     setAnchorEl(null);
