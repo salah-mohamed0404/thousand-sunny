@@ -39,7 +39,7 @@ const ProductContent = ({ title, price, discount, rating = 0, quantity }) => {
             ${" "}
             {(
               (quantity ? quantity * price : price) *
-              ((discount - 1) / 100)
+              ((100 - discount) / 100)
             ).toFixed(2)}
           </Typography>
         </Stack>
