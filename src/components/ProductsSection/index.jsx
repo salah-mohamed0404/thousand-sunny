@@ -4,48 +4,104 @@ import ProductFilter from "./ProductFilter";
 import ProductsList from "../ProductList";
 import ProductSorter from "./ProductSorter";
 import { memo, useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+import { fetchProducts, fetchProductsByCategory } from "../../api/ProductsAPI";
+import CustomizationsContainer from "./CustomizationsContainer";
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = {
+    priceRange: searchParams.get("price"),
+    category: searchParams.get("category"),
+    priceOrder: searchParams.get("priceOrder"),
+  };
 
-  const fetchProducts = useCallback(async (skip = 0) => {
-    setLoading(true);
+  /********** Filter products based on price range**********/
+  const handlePriceRange = useCallback(
+    (products) => {
+      if (!params.priceRange) return products;
 
-    const url = `https://dummyjson.com/products?limit=30&skip=${skip}`;
-    const res = await axios.get(url);
+      const priceRange = params.priceRange
+        .split(",")
+        .map((item) => parseInt(item));
 
-    setProducts(res.data.products);
-    setLoading(false);
-  }, []);
+      return products.map((product) => {
+        let { discountPercentage: discount, price } = product;
 
+        if (discount) price = price * ((100 - discount) / 100);
+        if (price >= priceRange[0] && price <= priceRange[1]) {
+          product.hide = true;
+        } else product.hide = false;
+
+        return product;
+      });
+    },
+    [params.priceRange]
+  );
+
+  /********** Sort products based on price **********/
+  const handleSort = useCallback(
+    (products) => {
+      const order = params.priceOrder;
+      if (!order) return products;
+
+      if (order === "asc") {
+        return products.sort((a, b) => a.price - b.price);
+      } else if (order === "desc") {
+        return products.sort((a, b) => b.price - a.price);
+      }
+    },
+    [params.priceOrder]
+  );
+
+  /********** Fetch products and filter them **********/
+  const getProducts = useCallback(
+    async (category) => {
+      setLoading(true);
+
+      let products = !category
+        ? await fetchProducts()
+        : await fetchProductsByCategory(category);
+
+      products = handlePriceRange(products);
+      products = handleSort(products);
+
+      setProducts(products);
+      setLoading(false);
+    },
+    [handlePriceRange, handleSort]
+  );
+
+  /********** Handle fetch products and filters *********/
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    getProducts(params.category);
+  }, [getProducts, params.category]);
 
-  const handleProducts = useCallback((products) => {
-    setProducts(products);
-  }, []);
+  const updateSearchParams = useCallback(
+    (key, value) => {
+      setSearchParams((prev) => {
+        prev.set(key, value);
+        return prev;
+      });
+    },
+    [setSearchParams]
+  );
 
   return (
     <Container component="section">
       <Stack spacing={3}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          py={2}
-          borderBottom="1px solid"
-          borderColor="divider"
-        >
+        <CustomizationsContainer>
           <ProductFilter
-            products={products}
-            handleProducts={handleProducts}
-            fetchProducts={fetchProducts}
+            updateSearchParams={updateSearchParams}
+            priceRangePararm={params.priceRange}
           />
-          <ProductSorter handleProducts={handleProducts} />
-        </Stack>
+          <ProductSorter
+            updateSearchParams={updateSearchParams}
+            priceOrderParam={params.priceOrder}
+          />
+        </CustomizationsContainer>
 
         {!loading ? (
           <ProductsList
@@ -54,7 +110,12 @@ const ProductSection = () => {
             col={12.75}
           />
         ) : (
-          <Loading containerProps={{ my: 20 }} progressProps={{ size: 130 }} />
+          <div>
+            <Loading
+              containerProps={{ my: 10 }}
+              progressProps={{ size: 130 }}
+            />
+          </div>
         )}
       </Stack>
     </Container>
