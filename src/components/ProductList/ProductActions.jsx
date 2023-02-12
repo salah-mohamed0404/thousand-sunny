@@ -19,13 +19,15 @@ const ProductActions = ({ product, quantity, setQuantity }) => {
 
   const handleAddToCart = () => {
     product.quantity = 1;
+    setQuantity(1);
     addToCart(product);
   };
 
   const handleRemoveFromCart = useCallback(() => {
     product.quantity = 0;
+    setQuantity(0);
     removeFromCart(product);
-  }, [product, removeFromCart]);
+  }, [product, removeFromCart, setQuantity]);
 
   return (
     <CardActions>
