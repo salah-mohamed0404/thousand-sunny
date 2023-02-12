@@ -14,22 +14,25 @@ const ProductsList = ({ col = 12, breakpoints = [], products = [] }) => {
       justifyContent="center"
       justifyItems="center"
     >
-      {products.map((product) => (
-        <ItemWapper key={product.id} breakpoints={breakpoints}>
-          <Badge
-            color="primary"
-            badgeContent={`-${product.discountPercentage}%`}
-            overlap="rectangular"
-            sx={{
-              position: "absolute",
-              top: "5%",
-              right: "15%",
-            }}
-          />
+      {products.map(
+        (product) =>
+          (product.hide === undefined || product.hide) && (
+            <ItemWapper key={product.id} breakpoints={breakpoints}>
+              <Badge
+                color="primary"
+                badgeContent={`-${product.discountPercentage}%`}
+                overlap="rectangular"
+                sx={{
+                  position: "absolute",
+                  top: "5%",
+                  right: "15%",
+                }}
+              />
 
-          <ProductBody product={product} />
-        </ItemWapper>
-      ))}
+              <ProductBody product={product} />
+            </ItemWapper>
+          )
+      )}
     </Grid>
   );
 };
