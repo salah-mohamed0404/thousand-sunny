@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Grid, IconButton, Stack, Typography } from "@mui/material";
 import { FacebookRounded, Instagram, Twitter } from "@mui/icons-material";
-import logo from "../../assets/thousand-sunny-logo.png";
+import logo from "../../assets/thousand-sunny-logo.webp";
 
 const LogoCol = () => {
   return (

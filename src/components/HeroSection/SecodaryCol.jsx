@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import ColWrapper from "./ColWrapper";
-import perfumeImg from "../../assets/perfume2.jpg";
+import perfumeImg from "../../assets/perfume.webp";
 import { Link } from "react-router-dom";
 
 const SecodaryCol = ({ breakpoints = {} }) => {

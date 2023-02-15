@@ -1,6 +1,6 @@
 import { alpha, Container } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import techSuppportImg from "../../assets/tech-support.jpg";
+import techSuppportImg from "../../assets/tech-support.webp";
 
 const SectionContainer = ({ children }) => {
   return (

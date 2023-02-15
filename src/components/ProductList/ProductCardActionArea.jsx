@@ -1,7 +1,7 @@
 import { CardActionArea, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
 import ProductContent from "./ProductContent";
-import placeholderImg from "../../assets/placeholder.jpg";
+import placeholderImg from "../../assets/placeholder.webp";
 
 const ProductCardActionArea = ({ product, quantity }) => {
   return (

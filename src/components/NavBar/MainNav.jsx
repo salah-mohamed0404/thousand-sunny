@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Stack } from "@mui/material";
-import logo from "../../assets/thousand-sunny-logo.png";
+import logo from "../../assets/thousand-sunny-logo.webp";
 import { lazy, Suspense, useContext } from "react";
 import ThemeContext from "../../store/theme-context";
 import { UserProfileButton } from "./MainButtons";
@@ -25,7 +25,7 @@ const MainNav = () => {
           sx={{ width: "100%" }}
         >
           <Link to="/">
-            <img src={logo} alt="website logo" style={{ width: 64 }} />
+            <img src={logo} alt="website logo" width={64} height={64} />
           </Link>
 
           <Suspense>{isDesktop && <MainNavButtons />}</Suspense>

@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import laptop from "../../assets/laptop.jpg";
+import laptop from "../../assets/laptop.webp";
 import ColWrapper from "./ColWrapper";
 
 const PrimaryCol = ({ breakpoints = {} }) => {

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { alpha, Box, Container, Grid } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import tech from "../../assets/tech-wallpaper.jpg";
+import tech from "../../assets/tech-wallpaper.webp";
 import ThemeContext from "../../store/theme-context";
 
 const HeroWrapper = ({ children }) => {
