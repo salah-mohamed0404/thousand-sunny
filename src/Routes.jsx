@@ -2,14 +2,14 @@ import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthenticatedRoute from "./components/CheckAuthRoutes/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/CheckAuthRoutes/UnauthenticatedRoute";
-import Cart from "./containers/Cart";
-import Wishlist from "./containers/Wishlist";
 const Home = lazy(() => import("./containers/Home"));
 const Login = lazy(() => import("./containers/Login"));
 const SignUp = lazy(() => import("./containers/SignUp"));
 const Products = lazy(() => import("./containers/Products"));
-const ProductDetails = lazy(() => import("./containers/ProductDetails"));
-const UserProfile = lazy(() => import("./containers/UserProfile"));
+// const ProductDetails = lazy(() => import("./containers/ProductDetails"));
+const Wishlist = lazy(() => import("./containers/Wishlist"));
+// const CheckOut = lazy(() => import('./containers/CheckOut'))
+// const UserProfile = lazy(() => import("./containers/UserProfile"));
 const NotFound = lazy(() => import("./containers/NotFound"));
 
 export default function Links() {
@@ -35,7 +35,7 @@ export default function Links() {
             }
           />
           <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
+          {/* <Route path="/products/:id" element={<ProductDetails />} /> */}
           <Route
             path="/wishlist"
             element={
@@ -44,22 +44,22 @@ export default function Links() {
               </AuthenticatedRoute>
             }
           />
-          <Route
-            path="/cart"
+          {/* <Route
+            path="/checkOut"
             element={
               <AuthenticatedRoute>
-                <Cart />
+                <CheckOut />
               </AuthenticatedRoute>
             }
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/user-profile"
             element={
               <AuthenticatedRoute>
                 <UserProfile />
               </AuthenticatedRoute>
             }
-          />
+          /> */}
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
