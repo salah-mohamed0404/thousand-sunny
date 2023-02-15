@@ -8,9 +8,11 @@ const fetch = async (url) => {
   return res.data.products;
 };
 
-export const fetchProducts = async (page = 0, limit = 30) => {
+export const fetchProducts = async (page = 0, limit = 30, select = null) => {
   const skip = page * limit;
-  const url = `${API_URL}?limit=${limit}&skip=${skip}`;
+  const url = `${API_URL}?limit=${limit}&skip=${skip}${
+    select ? `&select=${select.join(",")}` : ""
+  }`;
   const products = await fetch(url);
 
   return products;
@@ -26,4 +28,9 @@ export const fetchProductsByCategory = async (
   const products = await fetch(url);
 
   return products;
+};
+
+export const fetchCategories = async () => {
+  const res = await axios.get(`${API_URL}/categories`);
+  return res.data;
 };

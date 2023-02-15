@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
-import axios from "axios";
 import Title from "./Title";
 import CategoryContainer from "./CategoryContainer";
 import Category from "./Category";
+import { fetchCategories } from "../../api/ProductsAPI";
 
 const Categories = ({ maxHeight = 430 }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await axios.get("https://dummyjson.com/products/categories");
-      setCategories(res.data);
+    const getCategories = async () => {
+      const categoriesRes = await fetchCategories();
+      setCategories(categoriesRes);
     };
-    fetchCategories();
+    getCategories();
   }, []);
 
   return (

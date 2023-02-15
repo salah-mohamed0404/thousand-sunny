@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import HomeProductList from "./HomeProductList";
+import { fetchProducts } from "../../api/ProductsAPI";
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const getProducts = async () => {
       setLoading(true);
-      const res = await axios.get(
-        "https://dummyjson.com/products?limit=6&select=id,title,rating,price,discountPercentage"
-      );
-      setProducts(res.data.products);
+
+      const productRes = await fetchProducts(0, 6, [
+        "id",
+        "title",
+        "rating",
+        "price",
+        "discountPercentage",
+      ]);
+
+      setProducts(productRes);
       setLoading(false);
     };
-    fetchProducts();
+    getProducts();
   }, []);
 
   return <HomeProductList loading={loading} products={products} />;
